@@ -1,6 +1,6 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-def chuck_document(documents, metadata_list,  chunk_size=1000, chunk_overlap=100):
+def chuck_document(documents, metadata_list,  chunk_size=500, chunk_overlap=50):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,

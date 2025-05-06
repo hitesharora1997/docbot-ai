@@ -1,5 +1,6 @@
 import os
 from unicodedata import category
+from langchain.document_loaders import PyPDFLoader
 
 
 def load_text_files(directory: str):
@@ -8,8 +9,10 @@ def load_text_files(directory: str):
 
     for root, _, files in os.walk(directory):
         for filename in files:
-            if filename.endswith(".txt"):
-                filepath = os.path.join(root, filename)
+            filepath = os.path.join(root, filename)
+            ext = os.path.splitext(filename)[1].lower()
+
+            if ext == ".txt":
                 with open(filepath, "r", encoding="utf-8") as f:
                     content = f.read()
                     category = os.path.basename(root)
@@ -17,6 +20,18 @@ def load_text_files(directory: str):
                     metadata.append({
                         "source": filename,
                         "category": category
+                    })
+
+            elif ext == ".pdf":
+                loader = PyPDFLoader(filepath)
+                pdf_docs = loader.load()
+                category = os.path.basename(root)
+                for i, page in enumerate(pdf_docs):
+                    documents.append(page.page_content)
+                    metadata.append({
+                        "source": filename,
+                        "category": category,
+                        "page_number": i
                     })
 
     return documents, metadata
