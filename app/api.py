@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from core.retriever import retrieve_similar_chunks
 from core.prompt import build_prompt
@@ -10,19 +10,19 @@ class ChatRequest(BaseModel):
     query: str
 
 @router.post("/chat")
-def chat(request: ChatRequest):
-    chunks, meta = retrieve_similar_chunks(request.query)
-    top_chunks = chunks[:3]
-    prompt = build_prompt(request.query, top_chunks)
-    answer = ask_gemini(prompt)
-
-    print("==== PROMPT ====")
-    print(prompt)
-    print("================")
-
-    return {
-        "query": request.query,
-        "answer": answer,
-        "source_chunks": chunks,
-        "metadata": meta
-    }
+async def chat(request: ChatRequest):
+    try:
+        chunks, meta = retrieve_similar_chunks(request.query)
+        top_chunks = chunks[:3]
+        prompt = build_prompt(request.query, top_chunks)
+        print("==== PROMPT ====")
+        print(prompt[:300], "...\n================")
+        answer = await ask_gemini(prompt)
+        return {
+            "query": request.query,
+            "answer": answer,
+            "source_chunks": chunks,
+            "metadata": meta
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Server error: {str(e)}")

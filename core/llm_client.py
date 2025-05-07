@@ -1,15 +1,18 @@
-# core/llm_client.py
-import google.generativeai as genai
 import os
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=GOOGLE_API_KEY)
 
-genai.configure(api_key=GEMINI_API_KEY)
+model = genai.GenerativeModel("models/gemini-1.5-pro-latest")  # Explicit path
 
-model = genai.GenerativeModel("gemini-pro")
+async def ask_gemini(prompt: str) -> str:
+    try:
+        response = await model.generate_content_async(prompt)
+        return response.text.strip() if response.text else "No response from Gemini."
+    except Exception as e:
+        print(f"Gemini error: {e}")
+        return f"Gemini error: {e}"
 
-def ask_gemini(prompt: str) -> str:
-    response = model.generate_content(prompt)
-    return response.text.strip()

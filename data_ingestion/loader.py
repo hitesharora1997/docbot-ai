@@ -1,6 +1,6 @@
 import os
 from unicodedata import category
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 
 
 def load_text_files(directory: str):
