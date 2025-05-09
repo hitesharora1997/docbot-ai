@@ -17,6 +17,7 @@ A professional-grade, private chatbot that answers questions based on your own d
 
 ## 🧱 Architecture Overview
 
+```bash
 User Query
 ↓
 Vector Embedding (local)
@@ -30,7 +31,7 @@ Prompt Builder
 LLM Query (Google Gemini API)
 ↓
 AI Response
-
+```
 ---
 
 ✅ Project Structure
