@@ -25,7 +25,6 @@ venv/
 # ---------------------
 # ChromaDB / Vector DB files
 # ---------------------
-db/
 chroma/
 index/
 *.duckdb
