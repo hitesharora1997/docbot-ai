@@ -1,35 +1,53 @@
-# Python
+# ---------------------
+# Python cache & bytecode
+# ---------------------
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.so
 
-# Virtual environment
+# ---------------------
+# Virtual environments
+# ---------------------
 venv/
-.env/
-.env.local
-.env.*.local
-*.env
 .venv/
+.env
+.env.*
+*.env
 
-# VSCode / IDE
+# ---------------------
+# IDE/Editor files
+# ---------------------
 .vscode/
 .idea/
 
-
-# ChromaDB + Vector DB
+# ---------------------
+# ChromaDB / Vector DB files
+# ---------------------
 db/
 chroma/
 index/
 *.duckdb
 *.parquet
 
-# Data files
-data/raw/
-data/processed/
+# ---------------------
+# Data folders (privacy-sensitive)
+# ---------------------
+data/
 outputs/
 *.csv
 *.json
+*.xlsx
+*.tsv
 
+# ---------------------
+# Logs / Reports
+# ---------------------
+*.log
+*.tmp
 
+# ---------------------
+# Misc
+# ---------------------
+.DS_Store
