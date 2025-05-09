@@ -6,7 +6,7 @@ load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
 
-model = genai.GenerativeModel("models/gemini-1.5-pro-latest")  # Explicit path
+model = genai.GenerativeModel("gemini-2.0-flash")  # Explicit path
 
 async def ask_gemini(prompt: str) -> str:
     try:

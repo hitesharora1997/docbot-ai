@@ -1,22 +1,30 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+# data_ingestion/chunker.py
 
-def chuck_document(documents, metadata_list,  chunk_size=500, chunk_overlap=50):
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len
-    )
-
-    all_chucks = []
-    all_metadata = []
+def chunk_by_risk_level(documents, metadata_list):
+    grouped_chunks = {
+        "prohibited": [],
+        "high": [],
+        "medium": [],
+        "low": []
+    }
 
     for doc, metadata in zip(documents, metadata_list):
-        chunks = splitter.split_text(doc)
-        for i, chunk in enumerate(chunks):
-            all_chucks.append(chunk)
-            new_metadata = metadata.copy()
-            new_metadata["chunk_index"] = i
-            all_metadata.append(new_metadata)
+        lines = doc.splitlines()
+        for line in lines:
+            if not line.strip():
+                continue
+            for risk in grouped_chunks.keys():
+                if line.strip().endswith(risk):
+                    grouped_chunks[risk].append(line)
+                    break
 
-    return all_chucks, all_metadata
+    all_chunks = []
+    all_metadata = []
 
+    for risk, lines in grouped_chunks.items():
+        if lines:
+            chunk = f"Risk Level: {risk}\n" + "\n".join(lines)
+            all_chunks.append(chunk)
+            all_metadata.append({"risk_level": risk})
+
+    return all_chunks, all_metadata

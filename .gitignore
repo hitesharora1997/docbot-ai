@@ -11,6 +11,7 @@ venv/
 .env.local
 .env.*.local
 *.env
+.venv/
 
 # VSCode / IDE
 .vscode/
