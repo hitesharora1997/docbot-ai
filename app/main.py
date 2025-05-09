@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from app.api import router
+import os
+
+PORT = int(os.environ.get("PORT", 8000))
+
 
 app = FastAPI(title="DocBot AI")
 
