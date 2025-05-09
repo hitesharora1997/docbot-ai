@@ -9,7 +9,7 @@ A professional-grade, private chatbot that answers questions based on your own d
 - 🔍 Intelligent search over private documents (PDF, CSV, TXT)
 - 🧩 Chunking & semantic embedding with SentenceTransformers
 - 💬 Real-time QA using Gemini API
-- 📚 Modular, clean architecture (SOLID principles)
+- 📚 Modular, clean architecture 
 - 🐳 Dockerized and cloud-deployable (AWS, Azure, Render)
 - 📈 Extendable with authentication, CI/CD, or frontends (Streamlit/React)
 
