@@ -124,6 +124,7 @@ streamlit run ui/streamlit_app.py
 
 🧪 API Usage
 POST `/chat`
+Headers: `Content-Type: application/json`
 
 ```json
 {

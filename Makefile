@@ -9,20 +9,22 @@ UVICORN_APP = app.main:app
 all: clean setup install ingest run
 
 setup:
-	@echo "🔧 Creating virtual environment..."
+	@echo " Creating virtual environment..."
 	python3 -m venv $(VENV_NAME)
 	$(PIP) install --upgrade pip
 
 install:
-	@echo "📦 Installing dependencies..."
+	@echo " Installing dependencies..."
 	$(PIP) install -r requirements.txt
 
 run:
-	@echo "🚀 Starting FastAPI backend..."
-	PYTHONPATH=$(PWD) $(VENV_NAME)/bin/uvicorn $(UVICORN_APP) --reload
+	@echo " Starting FastAPI backend in background..."
+	@nohup $(VENV_NAME)/bin/uvicorn $(UVICORN_APP) --host 0.0.0.0 --port 8000 > backend.log 2>&1 &
+	@echo "️ Launching Streamlit frontend..."
+	streamlit run ui/streamlit_app.py
 
 ui:
-	@echo "🖥️ Launching Streamlit UI..."
+	@echo "️ Launching Streamlit UI..."
 	PYTHONPATH=$(PWD) streamlit run ui/streamlit_app.py
 
 ingest:
