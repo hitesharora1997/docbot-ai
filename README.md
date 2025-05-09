@@ -142,14 +142,16 @@ Response:
 
 Below is a preview of the Streamlit UI for asking questions from your own documents using Gemini:
 
-### 🔄 Example 1: Loading State
 
-![Gemini Chatbot Thinking](./assets/chatbot_thinking.png)
+
+### ▶️ Example 1: Loading State
+
+![Gemini Chatbot Answer](assets/chatbot_thinking.png)
+
+### 🔄 Example 2: Answer State
+
+![Gemini Chatbot Thinking](assets/chatbot_answer.png)
 
 ---
-
-### ▶️ Example 2: Loading State
-
-![Gemini Chatbot Answer](./assets/chatbot_answer.png)
 
 
